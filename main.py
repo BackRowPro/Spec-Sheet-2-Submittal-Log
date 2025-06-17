@@ -40,4 +40,4 @@ def split_and_filter_spec_sections(text):
 
     return filtered_sections
 
-print(split_and_filter_spec_sections(extract_text_from_pdf()))
+print(split_and_filter_spec_sections(extract_text_from_pdf(pdf_text)))
