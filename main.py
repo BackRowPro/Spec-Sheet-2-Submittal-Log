@@ -53,11 +53,11 @@ def extract_text_from_pdf(file_path):
 # ✂️ Splits into SECTION blocks and filters ones mentioning "submittal"
 def split_and_filter_spec_sections(text):
     print("Splitting and filtering...")
-    sections = re.split(r'(?=SECTION\s\d{2}\s\d{4})', text)
+    sections = re.split(r'(?=SECTION\s+\d{2}\s+\d{4})', text, flags=re.IGNORECASE)
     filtered_sections = []
 
     for sec in sections:
-        if 'submittal' in sec.lower():
+        if re.search(r'\bsubmittals?\b', sec, re.IGNORECASE):
             header_match = re.search(r'SECTION\s(\d{2}\s\d{4})\s*(.*)', sec)
             section_number = header_match.group(1) if header_match else "UNKNOWN"
             title = header_match.group(2).strip() if header_match else "NO TITLE"
@@ -73,7 +73,7 @@ def split_and_filter_spec_sections(text):
 
 # 🚀 Main entry point
 def main():
-    file_path = r"C:\Github Projects\Spec-Sheet-2-Submittal-Log\TEST_AggieShort.pdf"
+    file_path = r"C:\Github Projects\Spec-Sheet-2-Submittal-Log\2025.06.04 - Texas Aggies Corps of Cadets Association - Project Manual.pdf"
     pdf_text = extract_text_from_pdf(file_path)
 
     if not pdf_text.strip():
