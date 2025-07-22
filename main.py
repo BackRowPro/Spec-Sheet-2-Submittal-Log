@@ -87,7 +87,7 @@ def split_and_filter_spec_sections(text):
 
 # 🚀 Main entry point
 def main():
-    file_path = r"C:\Github Projects\Spec-Sheet-2-Submittal-Log\2025.06.04 - Texas Aggies Corps of Cadets Association - Project Manual.pdf"
+    file_path = r"C:\Github Projects\Spec-Sheet-2-Submittal-Log\TEST_AggieShort.pdf"
     pdf_text = extract_text_from_pdf(file_path)
 
     if not pdf_text.strip():
