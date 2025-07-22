@@ -37,18 +37,30 @@ def clean_text_spacing(text):
 
     return text
 
-# 📄 Extracts raw text from a PDF file
+from pdf2image import convert_from_path
+from PIL import Image
+import pytesseract
+import os
+
+# 🔄 Replace this function
 def extract_text_from_pdf(file_path):
-    full_text = ""
-    print("Extracting text...")
-    with pdfplumber.open(file_path) as pdf:
-        for i, page in enumerate(pdf.pages):
-            text = page.extract_text()
-            if text:
-                full_text += text + "\n\n"
-            else:
-                print(f"⚠️ No text found on page {i + 1}")
-    return full_text
+    print("Running OCR...")
+    
+    # If necessary, set tesseract path
+    # pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+    pages = convert_from_path(file_path, dpi=300)
+    all_text = ""
+
+    for i, page in enumerate(pages):
+        print(f"🖼️ Processing page {i + 1}...")
+        text = pytesseract.image_to_string(page)
+        if text.strip():
+            all_text += text + "\n\n"
+        else:
+            print(f"⚠️ OCR found no text on page {i + 1}")
+
+    return all_text
 
 # ✂️ Splits into SECTION blocks and filters ones mentioning "submittal"
 def split_and_filter_spec_sections(text):
