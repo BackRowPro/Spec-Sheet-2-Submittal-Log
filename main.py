@@ -49,7 +49,9 @@ def extract_text_from_pdf(file_path):
     # If necessary, set tesseract path
     # pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-    pages = convert_from_path(file_path, dpi=300)
+    pages = convert_from_path(file_path, dpi=300, poppler_path=r"C:\\poppler\\poppler-24.02.0\\Library\bin")
+
+    print("Converting...")
     all_text = ""
 
     for i, page in enumerate(pages):
