@@ -87,12 +87,18 @@ def split_and_filter_spec_sections(text):
 
 # 🚀 Main entry point
 def main():
-    file_path = r"C:\Github Projects\Spec-Sheet-2-Submittal-Log\TEST_AggieShort.pdf"
+    file_path = r"C:\\Github Projects\Spec-Sheet-2-Submittal-Log\\2025.06.04 - Texas Aggies Corps of Cadets Association - Project Manual.pdf"
     pdf_text = extract_text_from_pdf(file_path)
 
     if not pdf_text.strip():
         print("❌ No extractable text found. PDF may be image-based.")
         return
+
+    # 👇 Preview first 500 OCR words BEFORE cleaning
+    ocr_words = pdf_text.split()
+    preview = " ".join(ocr_words[:500])
+    print("\n🧠 First 500 OCR-extracted words (raw):\n")
+    print(preview)
 
     cleaned_text = clean_text_spacing(pdf_text)
     filtered_sections = split_and_filter_spec_sections(cleaned_text)
